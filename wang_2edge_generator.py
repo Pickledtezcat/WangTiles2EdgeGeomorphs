@@ -1,8 +1,6 @@
 import PIL
 
-from PIL import Image, ImageOps, ImageDraw, ImageFont
-import os
-
+from PIL import Image, ImageDraw
 import random
 
 
@@ -11,9 +9,12 @@ class WangTiles(object):
     def __init__(self):
         self.cell_size = 350
         self.square_size = 50
+        
+        self.x_max = 7
+        self.y_max = 5
 
-        #self.build_cells()
-        self.random_dungeon()
+        self.build_cells()
+        self.random_dungeon()  
 
     def check_exit(self, index, heading):
         return int(index/heading) % 2
@@ -123,8 +124,8 @@ class WangTiles(object):
             r_array.save("./rooms.jpg", "JPEG")
 
     def random_dungeon(self):
-        max_x = 7
-        max_y = 5
+        max_x = self.x_max
+        max_y = self.y_max
         white = (255,255,255)
         
         base = Image.new("RGB", [self.cell_size * max_x, self.cell_size * max_y], color=white)                    
@@ -140,8 +141,6 @@ class WangTiles(object):
 
 
         exits = [[0,-1,1], [1,0,2], [0,1,4], [-1,0,8]]       
-
-        
 
         for x in range(max_x):
             for y in range(max_y):
@@ -175,7 +174,6 @@ class WangTiles(object):
                     base.paste(pasted_object, box=[x*350, y*350])
                     
         base.save("./random_dungeon.jpg", "JPEG")
-
             
 tile_builder = WangTiles()
 print("finished")
