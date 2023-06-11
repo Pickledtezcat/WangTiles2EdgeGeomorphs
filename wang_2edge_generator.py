@@ -1,8 +1,11 @@
 import PIL
+import os
 
 from PIL import Image, ImageDraw
 import random
 
+if not os.path.exists("./set1/"):
+    os.makedirs("./set1")
 
 class WangTiles(object):
 
